@@ -1,19 +1,36 @@
 package encryptdecrypt;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        // default values
+        String mode = "enc";
+        int key = 0;
+        String data = "";
 
-        String action = scanner.nextLine();
-        String stringToEncrypt = scanner.nextLine();
-        int key = Integer.parseInt(scanner.nextLine());
+        // get values from args
+        for (int i = 0; i < args.length; i++) {
+            if ("-mode".equals(args[i])) {
+                i++;
+                if (i < args.length) {
+                    mode = args[i];
+                }
+            } else if ("-key".equals(args[i])) {
+                i++;
+                if (i < args.length) {
+                    key = Integer.parseInt(args[i]);
+                }
+            } else if ("-data".equals(args[i])) {
+                i++;
+                if (i < args.length) {
+                    data = args[i];
+                }
+            }
+        }
 
-        if ("enc".equals(action)) {
-            System.out.println(EncryptorUtil.getEncryptedString(stringToEncrypt, key));
+        if ("enc".equals(mode)) {
+            System.out.println(EncryptorUtil.getEncryptedString(data, key));
         } else {
-            System.out.println(EncryptorUtil.getDecryptedString(stringToEncrypt, key));
+            System.out.println(EncryptorUtil.getDecryptedString(data, key));
         }
     }
 }
