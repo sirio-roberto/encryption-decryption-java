@@ -11,6 +11,7 @@ public class Main {
         String data = "";
         String filePathIn = null;
         String filePathOut = null;
+        String alg = "shift";
 
         // get values from args
         for (int i = 0; i < args.length; i++) {
@@ -39,6 +40,11 @@ public class Main {
                 if (i < args.length) {
                     filePathOut = args[i];
                 }
+            } else if ("-alg".equals(args[i])) {
+                i++;
+                if (i < args.length) {
+                    alg = args[i];
+                }
             }
         }
 
@@ -48,9 +54,9 @@ public class Main {
 
         String outputString;
         if ("enc".equals(mode)) {
-            outputString = EncryptorUtil.getEncryptedString(data, key);
+            outputString = EncryptorUtil.getEncryptedString(data, key, alg);
         } else {
-            outputString = EncryptorUtil.getDecryptedString(data, key);
+            outputString = EncryptorUtil.getDecryptedString(data, key, alg);
         }
 
         if (filePathOut != null) {
